@@ -190,7 +190,7 @@ export class Modal {
             .addClass('isHide');
     }
 
-    public changeScene(sceneNum: number, noAnimation: boolean = false) {
+    public changeScene(sceneNum: number, noAnimation: boolean = false): void {
         const $scene: JQuery = this.sceneList[sceneNum];
 
         if (!$scene || $scene.hasClass('isAnimated')) {
@@ -229,13 +229,13 @@ export class Modal {
         }
     }
 
-    public prevScene(noAnimation: boolean = false) {
+    public prevScene(noAnimation: boolean = false): void {
         if (this.hasPrev()) {
             this.changeScene(this.currentSceneNum - 1, noAnimation);
         }
     }
 
-    public nextScene(noAnimation: boolean = false) {
+    public nextScene(noAnimation: boolean = false): void {
         if (this.hasNext()) {
             this.changeScene(this.currentSceneNum + 1, noAnimation)
         }
