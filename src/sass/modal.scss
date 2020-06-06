@@ -1,0 +1,194 @@
+// ---------------------------
+// Variables
+// ---------------------------
+
+$modalWidth: 500px;
+
+$easeInExpo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+$easeOutExpo: cubic-bezier(0.19, 1, 0.22, 1);
+
+
+// ---------------------------
+// Modal Styles
+// ---------------------------
+
+.modal {
+    z-index: 2147483647;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .3);
+
+    &.isClose {
+        display: none;
+    }
+
+    &.isOpen {
+        display: flex;
+    }
+}
+
+.modal__box {
+    position: relative;
+    width: $modalWidth;
+    background: #ffffff;
+    box-shadow: rgba(0, 0, 0, .1) 0 1px 7px;
+}
+
+.modal__close {
+    z-index: 2147483647;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.modal__frame {
+    padding: 30px;
+}
+
+.modal__scenes {
+}
+
+.modal__scene {
+    background: #ffffff;
+    text-align: center;
+
+    &.isHide {
+        display: none;
+    }
+
+    &.isShow {
+        display: block;
+    }
+}
+
+.modal__loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    opacity: .8;
+
+    &.isHide {
+        display: none;
+    }
+
+    &.isShow {
+        display: flex;
+    }
+}
+
+.modal__spinner {
+    width: 50px;
+    height: 50px;
+    border-top: 5px solid rgba(224, 224, 224, .2);
+    border-right: 5px solid rgba(224, 224, 224, .2);
+    border-bottom: 5px solid rgba(224, 224, 224, .2);
+    border-left: 5px solid #e0e0e0;
+    border-radius: 50%;
+    transform: translateZ(0);
+    animation: modalSpinner .5s infinite linear;
+
+    &::after {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+}
+
+// ---------------------------
+// Animations
+// ---------------------------
+
+@keyframes openModal {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes openModalBox {
+    from {
+        opacity: 0;
+        transform: scale(.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal--openAnim {
+    display: flex;
+    animation: openModal .5s $easeOutExpo;
+
+    .modal__box {
+        animation: openModalBox .5s $easeOutExpo;
+    }
+}
+
+@keyframes closeModal {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes closeModalBox {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(.5);
+    }
+}
+
+.modal--closeAnim {
+    display: flex;
+    animation: closeModal .5s $easeOutExpo;
+
+    .modal__box {
+        animation: closeModalBox .5s $easeOutExpo;
+    }
+}
+
+@keyframes modalSpinner {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes transitionModalScene {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal--transitionSceneAnim {
+    display: block;
+    animation: transitionModalScene .5s $easeOutExpo;
+}

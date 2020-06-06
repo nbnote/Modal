@@ -1,0 +1,60 @@
+@import "modal";
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 1.4rem;
+}
+
+input[type="text"],
+input[type="number"] {
+    padding: 10px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 0 0 20px;
+}
+
+.userList {
+    margin: 0 0 20px;
+    padding: 0;
+    list-style: none;
+}
+
+.userList__item {
+    margin: 0 0 10px;
+    padding: 15px 20px;
+    background: #ffffff;
+    border: 1px solid #e1e1e1;
+    box-shadow: rgba(0, 0, 0, .1) 0 1px 7px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+
+.btn {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 10px 14px;
+    border: 1px solid #000000;
+    cursor: pointer;
+
+    > img {
+        margin-right: 7px;
+        vertical-align: middle;
+    }
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Modal</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+    <script src="main.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>ユーザー一覧</h1>
+
+    <ul id="userList" class="userList">
+        <li class="userList__item">やまだ（46）</li>
+        <li class="userList__item">すずき（22）</li>
+        <li class="userList__item">さとう（67）</li>
+        <li class="userList__item">たかはし（18）</li>
+        <li class="userList__item">おおにし（40）</li>
+        <li class="userList__item">こばやし（35）</li>
+        <li class="userList__item">まつもと（29）</li>
+    </ul>
+
+    <div style="text-align: center">
+        <a id="sampleModalOpenButton" class="btn">ユーザーを追加</a>
+    </div>
+
+</div>
+
+
+<div id="sampleModal" class="modal">
+    <div class="modal__box">
+        <a class="modal__close">X</a>
+        <div class="modal__frame">
+            <div class="modal__scenes">
+                <div class="modal__scene">
+                    <p>ユーザー名を入力</p>
+                    <input id="name" type="text" style="margin-bottom: 20px;"><br>
+                    <a id="sampleModalNext" class="btn">次へ</a>
+                </div>
+
+                <div class="modal__scene">
+                    <p>年齢を入力</p>
+                    <input id="age" type="number" style="margin-bottom: 20px;"><br>
+                    <a id="sampleModalAdd" class="btn">追加</a>
+                </div>
+            </div>
+            <div class="modal__loading"><div class="modal__spinner"></div></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
