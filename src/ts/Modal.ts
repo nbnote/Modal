@@ -201,14 +201,13 @@ export class Modal {
             .removeClass('isShow')
             .addClass('isHide');
 
-        this.currentSceneNum = sceneNum;
-
         if (noAnimation) {
             $scene
                 .removeClass('isHide')
                 .addClass('isShow');
 
             this.frameHeightAdjust();
+            this.currentSceneNum = sceneNum;
             this.dispatchEvent(Modal.SCENE_CHANGE);
         } else {
             $scene
@@ -219,6 +218,7 @@ export class Modal {
                         .addClass('isShow')
                         .off('animationend webkitAnimationEnd');
 
+                    this.currentSceneNum = sceneNum;
                     this.dispatchEvent(Modal.SCENE_CHANGE);
                 })
                 .removeClass('isHide')
