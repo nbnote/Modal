@@ -24,21 +24,24 @@ document.addEventListener('DOMContentLoaded', (e: Event) => {
         modal.open();
     });
 
-    $('#sampleModalNext').on('click', () => {
+    $('.sampleModalPrev').on('click', () => {
+        modal.prevScene();
+    });
+
+    $('.sampleModalNext').on('click', () => {
         modal.nextScene();
     });
 
-    $('#sampleModalAdd').on('click', () => {
-        const $name: JQuery = $('#name');
-        const $age: JQuery = $('#age');
-
+    $('.sampleModalNext2').on('click', () => {
         modal.showLoading();
 
         doSomethingAsync(() => {
-            $('#userList').append($('<li class="userList__item">' + escapeHTML($name.prop('value')) + '（' + escapeHTML($age.prop('value')) + '）' + '</li>'));
-            $name.prop('value', '');
-            $age.prop('value', '');
-            modal.close();
+            modal.hideLoading();
+            modal.nextScene();
         });
+    });
+
+    $('.sampleModalClose').on('click', () => {
+        modal.close();
     });
 });

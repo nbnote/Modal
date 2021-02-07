@@ -1,21 +1,21 @@
 import $ from 'jquery';
 
 export class Modal {
-    static BOX_MARGIN: number = 20;
-    static MODAL_OPEN: string = 'modalOpen';
-    static MODAL_CLOSE: string = 'modalClose';
-    static SCENE_CHANGE: string = 'sceneChange';
+    static BOX_MARGIN:number = 20;
+    static MODAL_OPEN:string = 'modalOpen';
+    static MODAL_CLOSE:string = 'modalClose';
+    static SCENE_CHANGE:string = 'sceneChange';
 
-    private $modal: JQuery;
-    private $frame: JQuery;
-    private $loading: JQuery;
-    private $close: JQuery;
+    private $modal:JQuery;
+    private $frame:JQuery;
+    private $loading:JQuery;
+    private $close:JQuery;
 
-    private currentSceneNum: number;
-    private readonly sceneList: JQuery[];
-    private readonly numScenes: number;
+    private currentSceneNum:number;
+    private readonly sceneList:JQuery[];
+    private readonly numScenes:number;
 
-    constructor(modalId: string) {
+    constructor(modalId:string) {
         this.$modal = $('#' + modalId);
         this.$frame = this.$modal.find('.modal__frame');
         this.$loading = this.$modal.find('.modal__loading');
@@ -26,19 +26,21 @@ export class Modal {
 
         this.$frame
             .find('.modal__scene')
-            .each((index: number, element: HTMLElement) => {
+            .each((index:number, element:HTMLElement) => {
                 this.sceneList.push($(element));
             });
         this.numScenes = this.sceneList.length;
 
-        this.$close.on('click', this.close);
+        this.$close.on('click', () => {
+            this.close();
+        });
 
         this.init();
         $(window).on('resize', this.frameHeightAdjust);
     }
 
-    static scrollDisable(): void {
-        const $body: JQuery = $('body');
+    static scrollDisable():void {
+        const $body:JQuery = $('body');
 
         $body
             .css({
@@ -49,9 +51,9 @@ export class Modal {
             });
     }
 
-    static scrollEnable(): void {
-        const $body: JQuery = $('body');
-        const scrollY: number = parseInt($body.css('top')) * -1;
+    static scrollEnable():void {
+        const $body:JQuery = $('body');
+        const scrollY:number = parseInt($body.css('top')) * -1;
 
         $body
             .css({
@@ -64,7 +66,7 @@ export class Modal {
         $(window).scrollTop(scrollY);
     }
 
-    private init(): void {
+    private init():void {
         this.$modal
             .addClass('isClose')
             .removeClass('isOpen')
@@ -77,7 +79,7 @@ export class Modal {
             .addClass('isHide')
             .removeClass('isShow');
 
-        let i: number = this.numScenes;
+        let i:number = this.numScenes;
         for (; i--;) {
             this.sceneList[i]
                 .addClass('isHide')
@@ -91,8 +93,8 @@ export class Modal {
         this.changeScene(0, true);
     }
 
-    private frameHeightAdjust(): void {
-        const winH: number = $(window).height();
+    private frameHeightAdjust():void {
+        const winH:number = $(window).height();
 
         this.$frame
             .css({
@@ -101,7 +103,7 @@ export class Modal {
                 overflow: 'visible'
             });
 
-        const frameH: number = this.$frame.outerHeight();
+        const frameH:number = this.$frame.outerHeight();
 
         if (frameH + Modal.BOX_MARGIN * 2 > winH) {
             this.$frame
@@ -115,24 +117,24 @@ export class Modal {
         this.$frame.scrollTop(0);
     }
 
-    public hasPrev(): boolean {
+    public hasPrev():boolean {
         return this.currentSceneNum - 1 >= 0;
     }
 
-    public hasNext(): boolean {
+    public hasNext():boolean {
         return this.currentSceneNum + 1 < this.numScenes;
     }
 
-    public addEventListener(eventType: string, handler: () => void): void {
+    public addEventListener(eventType:string, handler:() => void):void {
     }
 
-    public removeEventListener(eventType: string, handler: () => void): void {
+    public removeEventListener(eventType:string, handler:() => void):void {
     }
 
-    public dispatchEvent(eventType: string): void {
+    public dispatchEvent(eventType:string):void {
     }
 
-    public open(): void {
+    public open():void {
         if (this.$modal.hasClass('isAnimated')) {
             return;
         }
@@ -155,7 +157,7 @@ export class Modal {
         this.frameHeightAdjust();
     }
 
-    public close(): void {
+    public close():void {
         if (this.$modal.hasClass('isAnimated')) {
             return;
         }
@@ -171,29 +173,29 @@ export class Modal {
                     .off('animationend webkitAnimationEnd');
 
                 this.init();
-                this.dispatchEvent(Modal.MODAL_OPEN);
+                this.dispatchEvent(Modal.MODAL_CLOSE);
             })
             .removeClass('isOpen')
             .addClass('modal--closeAnim')
             .addClass('isAnimated');
     }
 
-    public showLoading(): void {
+    public showLoading():void {
         this.$loading
             .removeClass('isHide')
             .addClass('isShow');
     }
 
-    public hideLoading(): void {
+    public hideLoading():void {
         this.$loading
             .removeClass('isShow')
             .addClass('isHide');
     }
 
-    public changeScene(sceneNum: number, noAnimation: boolean = false): void {
-        const $scene: JQuery = this.sceneList[sceneNum];
+    public changeScene(sceneNum:number, noAnimation:boolean = false):void {
+        const $scene:JQuery = this.sceneList[sceneNum];
 
-        if (!$scene || $scene.hasClass('isAnimated')) {
+        if (!$scene || this.$modal.hasClass('isAnimated')) {
             return;
         }
 
@@ -214,28 +216,30 @@ export class Modal {
                 .on('animationend webkitAnimationEnd', () => {
                     $scene
                         .removeClass('modal--transitionSceneAnim')
-                        .removeClass('isAnimated')
                         .addClass('isShow')
                         .off('animationend webkitAnimationEnd');
+
+                    this.$modal.removeClass('isAnimated');
 
                     this.currentSceneNum = sceneNum;
                     this.dispatchEvent(Modal.SCENE_CHANGE);
                 })
                 .removeClass('isHide')
-                .addClass('modal--transitionSceneAnim')
-                .addClass('isAnimated');
+                .addClass('modal--transitionSceneAnim');
+
+            this.$modal.addClass('isAnimated');
 
             this.frameHeightAdjust();
         }
     }
 
-    public prevScene(noAnimation: boolean = false): void {
+    public prevScene(noAnimation:boolean = false):void {
         if (this.hasPrev()) {
             this.changeScene(this.currentSceneNum - 1, noAnimation);
         }
     }
 
-    public nextScene(noAnimation: boolean = false): void {
+    public nextScene(noAnimation:boolean = false):void {
         if (this.hasNext()) {
             this.changeScene(this.currentSceneNum + 1, noAnimation)
         }

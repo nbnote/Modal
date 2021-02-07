@@ -4,28 +4,14 @@
     <meta charset="UTF-8">
     <title>Modal</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="main.js"></script>
 </head>
 <body>
 
 <div class="container">
-
-    <h1>ユーザー一覧</h1>
-
-    <ul id="userList" class="userList">
-        <li class="userList__item">やまだ（46）</li>
-        <li class="userList__item">すずき（22）</li>
-        <li class="userList__item">さとう（67）</li>
-        <li class="userList__item">たかはし（18）</li>
-        <li class="userList__item">おおにし（40）</li>
-        <li class="userList__item">こばやし（35）</li>
-        <li class="userList__item">まつもと（29）</li>
-    </ul>
-
-    <div style="text-align: center">
-        <a id="sampleModalOpenButton" class="btn">ユーザーを追加</a>
-    </div>
-
+    <a id="sampleModalOpenButton" class="btn">Modal Open</a>
 </div>
 
 
@@ -35,15 +21,37 @@
         <div class="modal__frame">
             <div class="modal__scenes">
                 <div class="modal__scene">
-                    <p>ユーザー名を入力</p>
-                    <input id="name" type="text" style="margin-bottom: 20px;"><br>
-                    <a id="sampleModalNext" class="btn">次へ</a>
+                    <p class="modal__scene__title">Scene.1</p>
+                    <div class="modal__scene__body">
+                        <div class="dummy"></div>
+                        <div class="dummy"></div>
+                        <div class="dummy"></div>
+                        <div class="dummy dummy--short"></div>
+                        <a class="btn sampleModalNext">Next</a>
+                    </div>
                 </div>
 
                 <div class="modal__scene">
-                    <p>年齢を入力</p>
-                    <input id="age" type="number" style="margin-bottom: 20px;"><br>
-                    <a id="sampleModalAdd" class="btn">追加</a>
+                    <p class="modal__scene__title">Scene.2</p>
+                    <div class="modal__scene__body">
+                        <div class="dummy"></div>
+                        <div class="dummy"></div>
+                        <div class="dummy"></div>
+                        <div class="dummy dummy--short"></div>
+                        <a class="btn btn--prev sampleModalPrev">Prev</a>
+                        <a class="btn sampleModalNext2">Next</a>
+                    </div>
+                </div>
+
+                <div class="modal__scene">
+                    <p class="modal__scene__title">Scene.3</p>
+                    <div class="modal__scene__body">
+                        <div class="dummy"></div>
+                        <div class="dummy"></div>
+                        <div class="dummy"></div>
+                        <div class="dummy dummy--short"></div>
+                        <a class="btn sampleModalClose">Close</a>
+                    </div>
                 </div>
             </div>
             <div class="modal__loading"><div class="modal__spinner"></div></div>
