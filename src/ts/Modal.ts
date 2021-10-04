@@ -36,7 +36,7 @@ export class Modal {
         });
 
         this.init();
-        $(window).on('resize', this.frameHeightAdjust);
+        $(window).on('resize', () => this.frameHeightAdjust());
     }
 
     static scrollDisable():void {
